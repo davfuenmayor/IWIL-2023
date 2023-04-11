@@ -1,5 +1,6 @@
 \documentclass{article}
-\usepackage{graphicx} % Required for inserting images
+\usepackage{graphicx,url} % Required for inserting images
+\usepackage[margin=1.5in]{geometry}
 
 \title{Searching for Wormholes in Proof-Space}
 \author{David Fuenmayor \& Christoph Benzmüller}
@@ -9,7 +10,7 @@
 
 \maketitle
 
-\section{Introduction}
+\section{Motivation}
 
 The present `position paper' for presentation at the IWIL-2023 workshop aims at further deepening the discussion initiated in \cite{LostProof} and recently expanded in \cite{BCPpaper}, regarding the intrinsic advantages of reasoning in higher-order logics and the role of `cut' lemmata and definitions in finding `too-long-for-cut-avoiding-first-order-reasoners' proofs.
 The leitmotif of this work can thus be suggestively summarized as:
@@ -30,16 +31,21 @@ In this presentation we will discuss three examples of what we see as `wormholes
 \section{Case Studies}
 We encode and analyze our case studies using the proof assistant Isabelle/HOL \cite{Isabelle}, which we employ mainly as a frontend (with sophisticated editor/syntax capabilities) in order to invoke concurrently many different first- and higher-order backend ATPs, via the integrated meta-prover Sledgehammer \cite{blanchette2016hammering}. The encoding has been carried out using `vanilla' simple type theory, avoiding library definitions and lemmata as much as possible (theory `Main' is imported for technical reasons). No Isabelle-specific extensions (locales, type classes, etc.) have been employed. The idea is that our proof problems shall remain self-contained and as close as possible to \texttt{THF} syntax \cite{THF}, so our experiments can be easily replicated directly on the concerned provers (as done in \cite{BCPpaper}).
 
-The corresponding Isabelle/HOL source files can be consulted under: \url{TODO}
+The corresponding Isabelle/HOL source files can be consulted under:\footnote{Because of space and time constraints we cannot discuss here the contents of these case studies. We encourage the reader to consult the provided source files which have been carefully commented and --so we believe-- or more pedagogic value as an interactive document than as \LaTeX\ prose.} \\ \url{https://github.com/davfuenmayor/IWIL-2023/tree/main/sources}
 
-\subsection{Boolos' Curious Inference (BCI)}
-TODO
+\paragraph*{Boolos' Curious Inference (BCI)}
+We encode the original BCI problem (file \texttt{BCI.thy}) employing algebraic notions and discuss the role of cut-definitions in enabling fully automatic proofs. Subsequently, we present a natural algebraic generalization of BCI (file \texttt{BCIgen.thy}) and show how this can also be solved automatically by ATPs. We also show that this general `cut-lemma' can be automatically employed by ATPs to solve BCI-like problems (e.g.~involving fast-growing Ackermann-like functions).
 
-\subsection{Modal Correspondence Theory}
-TODO
-\subsection{Compactness in Topology}
+\paragraph*{Modal Correspondence Theory}
+We present an algebraically-flavoured theory allowing for automatically proving correspondences between axiomatic conditions on relations and their respective modal operations (`box' and `diamond'). This theory is much less ambitious than others in the modal correspondence market (e.g.~\cite{Conradie2012} and references therein) but is simple enough to nicely illustrate how ATPs can cleverly exploit cut-lemmas to reason in modal and non-classical contexts.
 
-\section{Conclusion}
+\paragraph*{Compactness in Topology}
+We encode the notion of a compact set wrt.~a topology (file \texttt{BCI.thy}) employing definitions of different complexities. We then use ATPs to show under which circumstances those definitions are equivalent. In order to illustrate the prospects of introducing ATPs in formalized mathematics, we explore several `cut-lemmata' that should allow us to prove, fully automatically, a common classroom example, namely that the continuous image of a compact set is compact.\footnote{This is, however, still work-in-progress (and part of a larger project, cf.~\cite{CICM22}).}
+\\ 
+
+
+
+%\section{Conclusion}
 
 %Workshop webpage: \url{https://eprover.org/EVENTS/IWIL-2023.html}
 
