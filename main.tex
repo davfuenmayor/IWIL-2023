@@ -2,8 +2,8 @@
 \usepackage{graphicx} % Required for inserting images
 
 \title{Searching for Wormholes in Proof-Space}
-\author{Christoph Benzmüller and David Fuenmayor}
-\date{University of Bamberg and Freie Universität Berlin}
+\author{David Fuenmayor \& Christoph Benzmüller}
+\date{\normalsize Otto-Friedrich-Universität Bamberg and Freie Universität Berlin}
 
 \begin{document}
 
@@ -11,34 +11,44 @@
 
 \section{Introduction}
 
-Workshop webpage: \url{https://eprover.org/EVENTS/IWIL-2023.html}
+The present `position paper' for presentation at the IWIL-2023 workshop aims at further deepening the discussion initiated in \cite{LostProof} and recently expanded in \cite{BCPpaper}, regarding the intrinsic advantages of reasoning in higher-order logics and the role of `cut' lemmata and definitions in finding `too-long-for-cut-avoiding-first-order-reasoners' proofs.
+The leitmotif of this work can thus be suggestively summarized as:
+$$\textit{definitions and cut-lemmata can behave like wormholes in proof-space},$$
+where the proof-space analogy has been charmingly illustrated in the foreword (by Dolph Ulrich) of the book ``Automated Reasoning and the Discovery of Missing and Elegant Proofs'' by Larry Wos \& Gail W. Pieper \cite{wos2003automated}. We quote: 
+\\ \\
+\textit{``The overriding difficulty met at every turn was the unimaginably vast size of the space of proofs, a space in which all proofs solving a particular problem at hand might well be as unreachable as the farthest stars in the most distant galaxies. Consideration of quite short proofs suffices to illustrate this combinatorial explosion: even for systems of logic of the sort studied in this book that have just one axiom, for instance, there can be more 10-step proofs than kilometers in a light year, more 15-step proofs than stars in a trillion Milky Ways.''}
 \\
-\textbf{Motivating text:}
-\\
+%"In the face of such examples, one can hardly fail to ask if the very idea of discovering methods for finding proofs of theorems whose shortest demonstrations might be 25, 50, or 100 steps in length is simply an impossible dream. Wos’s own conviction (high-stakes poker player that he also happened to be) was that the answer is “No” and that the key to fruitfully exploring such immense search spaces lay—perhaps his most important insight of all—in the employment of strategy. In consequence, he made it one of his personal quests to discover a substantial set of particular strategies that could be drawn on and used, in varying combinations, on future problems of all types. [...]"}
 
-\textbf{From ChatGPT:}
-\\
-\textit{"Proof-space is a fascinating concept in mathematics that describes the vast and intricate space of all possible mathematical proofs. This space is filled with countless paths, each leading to a different solution and each one of them unique in its own way. To navigate this complex space, mathematicians often use lemmas, small intermediate results that are proven separately and then used as building blocks for larger proofs.
-One of the most intriguing features of proof-space is the existence of wormholes. These are shortcuts or connections between seemingly distant parts of proof-space, and lemmas often play a crucial role in uncovering these connections. By proving a lemma that connects two seemingly unrelated parts of mathematics, mathematicians can open up new wormholes that allow for breakthroughs and insights that were previously thought impossible.
-Wormholes in proof-space can also allow for unexpected solutions to long-standing mathematical problems. By using lemmas to connect different parts of proof-space, mathematicians can find entirely new approaches to solving problems that had previously seemed insurmountable.
-The discovery of a new wormhole in proof-space can be a thrilling moment for mathematicians, and often requires a deep understanding of the underlying concepts and the ability to recognize patterns and connections. By using lemmas as tools to uncover these connections, mathematicians can push the boundaries of what is possible in mathematics and make breakthroughs that have real-world applications.
-In conclusion, proof-space is a complex and fascinating realm in which lemmas play a crucial role in navigating the space and uncovering new wormholes. By proving lemmas that connect seemingly unrelated parts of mathematics, mathematicians can find new approaches to solving problems and make groundbreaking discoveries that have far-reaching implications. As we continue to explore this vast and intricate space, we will undoubtedly continue to rely on lemmas as tools for uncovering new connections and pushing the boundaries of what is possible in mathematics."}
-\\
-\textbf{From the foreword (by Dolph Ulrich) of the book "Automated Reasoning and the Discovery of Missing and Elegant Proofs" by Larry Wos \& Gail W. Pieper:}
-\\
-\textit{"[...] The overriding difficulty met at every turn was the unimaginably vast size of the space of proofs, a space in which all proofs solving a particular problem at hand might well be as unreachable as the farthest stars in the most distant galaxies. Consideration of quite short proofs suffices to illustrate this combinatorial explosion: even for systems of logic of the sort studied in this book that have just one axiom, for instance, there can be more 10-step proofs than kilometers in a light year, more 15-step proofs than stars in a trillion Milky Ways.
-In the face of such examples, one can hardly fail to ask if the very idea of discovering methods for finding proofs of theorems whose shortest demonstrations might be 25, 50, or 100 steps in length is simply an impossible dream. Wos’s own conviction (high-stakes poker player that he also happened to be) was that the answer is “No” and that the key to fruitfully exploring such immense search spaces lay—perhaps his most important insight of all—in the employment of strategy. In consequence, he made it one of his personal quests to discover a substantial set of particular strategies that could be drawn on and used, in varying combinations, on future problems of all types. [...]"}
-
-In the next sections we discuss three examples of wormholes in proof-space. The first has a motivational character and is based upon previous work \cite{IGPL-paper}, it serves to illustrate the astronomical magnitudes involved. The second corresponds to applications of logic in CS (modal correspondence theory) and the third concerns formalized mathematics (topology).
+In previous work \cite{BCPpaper} a thought experiment was presented as a motivating example: Folbert and Holly (waiting at the gates of heaven) become engaged in a theorem proving contest in which they have to pose first-order proof problems to each other, and the one whose ATP solves the given problem the faster will be admitted to heaven. Folbert goes for first-order (FO) ATPs and Holly for higher-order ATPs. We quote:
+\\ \\
+\textit{``Key to Holly's advantage are the (hyper-)exponentially shorter proofs that are possible as one moves up the ladder of expressiveness from first-order logic to second-order logic, to third-order logic, and so on  \cite{GoedelProofLength}. The fact that the proof problems are stated in FO logic does not matter. When stating the same problem in the same FO way but in higher-order logic, much shorter proofs are possible, some of which might even be (hyper-)exponentially shorter than the proofs that can be found with comparatively inexpressive FO ATPs. A very prominent example of such a short proof is that of \emph{Boolos' Curious Inference} \cite{BCI}.}"
+\\ \\
+In this presentation we will discuss three examples of what we see as `wormholes' in proof-space. The first one draws upon \emph{Boolos' Curious Inference} \cite{BCI}, as discussed in \cite{BCPpaper}, and has a motivational character; it serves to illustrate the astronomical magnitudes involved. The second one concerns the area of \textit{correspondence theory} for modal logics. A third one, which is still work-in-progress, concerns applications in formalized mathematics, and involves the notion of compactness in topology (and to some extent also in logic).
 
 
-\section{A Motivating Example: Boolos' Curious Inference}
+\section{Case Studies}
+We encode and analyze our case studies using the proof assistant Isabelle/HOL \cite{Isabelle}, which we employ mainly as a frontend (with sophisticated editor/syntax capabilities) in order to invoke concurrently many different first- and higher-order backend ATPs, via the integrated meta-prover Sledgehammer \cite{blanchette2016hammering}. The encoding has been carried out using `vanilla' simple type theory, avoiding library definitions and lemmata as much as possible (theory `Main' is imported for technical reasons). No Isabelle-specific extensions (locales, type classes, etc.) have been employed. The idea is that our proof problems shall remain self-contained and as close as possible to \texttt{THF} syntax \cite{THF}, so our experiments can be easily replicated directly on the concerned provers (as done in \cite{BCPpaper}).
 
-TODO: from Isabelle/HOL sources (on-demand)
+The corresponding Isabelle/HOL source files can be consulted under: \url{TODO}
 
-\section{Further Examples}
-TODO: from Isabelle/HOL sources (on-demand)
+\subsection{Boolos' Curious Inference (BCI)}
+TODO
+
+\subsection{Modal Correspondence Theory}
+TODO
+\subsection{Compactness in Topology}
 
 \section{Conclusion}
+
+%Workshop webpage: \url{https://eprover.org/EVENTS/IWIL-2023.html}
+
+
+
+
+
+
+\bibliographystyle{abbrv} 
+\bibliography{main}
 
 \end{document}
