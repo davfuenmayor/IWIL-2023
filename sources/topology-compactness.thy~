@@ -1,0 +1,17 @@
+theory "topology-compactness"
+  imports Main
+begin
+
+(*Given a function, we define the well-known "image" set-operator (and its less-known dual).
+  We can also read the term "(d)imageFun f A b" as "b is the (dual)image of A under f". *)
+definition  imageFun::"('a \<Rightarrow> 'b) \<Rightarrow> ('a \<sigma>,'b)\<rho>" ("[_ _]") (*suggestive notation for partial application*)
+  where "imageFun  f \<equiv> \<lambda>A. \<lambda>b. \<exists>a. (f a) = b \<and> A a"
+
+(**The mapping f:'u\<Rightarrow>'v is continuous if its direct image distributes (increasingly) over the closure*)
+abbreviation (input) Continuous::"('u \<sigma> \<Rightarrow> 'u \<sigma>) \<Rightarrow> ('v \<sigma> \<Rightarrow> 'v \<sigma>) \<Rightarrow> (('u \<Rightarrow> 'v))\<sigma>" ("_,_-CONT")
+  where "\<psi>,\<nu>-CONT f \<equiv> \<psi>,\<nu>-MORPH\<^sup>\<subseteq> (imageFun f)"
+
+lemma "\<psi>,\<nu>-CONT f = (\<forall>U. \<lbrakk>f (\<psi> U)\<rbrakk> \<subseteq> \<nu> [f U])" ..
+
+
+end
