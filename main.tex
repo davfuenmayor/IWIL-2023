@@ -37,10 +37,10 @@ The corresponding Isabelle/HOL source files can be consulted under:\footnote{Bec
 We encode the original BCI problem (file \texttt{BCI.thy}) employing algebraic notions and discuss the role of cut-definitions in enabling fully automatic proofs. Subsequently, we present a natural algebraic generalization of BCI (file \texttt{BCIgen.thy}) and show how this can also be solved automatically by ATPs. We also show that this general `cut-lemma' can be automatically employed by ATPs to solve BCI-like problems (e.g.~involving fast-growing Ackermann-like functions).
 
 \paragraph*{Modal Correspondence Theory}
-We present an algebraically-flavoured theory allowing for automatically proving correspondences between axiomatic conditions on relations and their respective modal operations (`box' and `diamond'). This theory is much less ambitious than others in the modal correspondence market (e.g.~\cite{Conradie2012} and references therein) but is simple enough to nicely illustrate how ATPs can cleverly exploit cut-lemmas to reason in modal and non-classical contexts.
+We present an algebraically-flavoured theory (cf.~file \texttt{modal-correspondence.thy}) allowing for automatically proving correspondences between axiomatic conditions on relations and their respective modal operations (`box' and `diamond'). This theory is much less ambitious than others in the modal correspondence market (e.g.~\cite{Conradie2012} and references therein) but is simple enough to nicely illustrate how ATPs can cleverly exploit cut-lemmas to reason in modal and non-classical contexts.
 
 \paragraph*{Compactness in Topology}
-We encode the notion of a compact set wrt.~a topology (file \texttt{BCI.thy}) employing definitions of different complexities. We then use ATPs to show under which circumstances those definitions are equivalent. In order to illustrate the prospects of introducing ATPs in formalized mathematics, we explore several `cut-lemmata' that should allow us to prove, fully automatically, a common classroom example, namely that the continuous image of a compact set is compact.\footnote{This is, however, still work-in-progress (and part of a larger project, cf.~\cite{CICM22}).}
+We encode the notion of a compact set wrt.~a topology (file \texttt{topology-compactness.thy}) employing definitions of different complexities. We then use ATPs to show under which circumstances those definitions are equivalent. In order to illustrate the prospects of introducing ATPs in formalized mathematics, we explore several `cut-lemmata' that should allow us to prove, fully automatically, a common classroom example, namely that the continuous image of a compact set is compact.\footnote{This is, however, still work-in-progress (and part of a larger project, cf.~\cite{CICM22}).}
 \\ 
 
 
@@ -54,7 +54,7 @@ We encode the notion of a compact set wrt.~a topology (file \texttt{BCI.thy}) em
 
 
 
-\bibliographystyle{abbrv} 
+\bibliographystyle{alpha} 
 \bibliography{main}
 
 \end{document}
