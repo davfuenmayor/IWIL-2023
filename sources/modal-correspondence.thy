@@ -94,7 +94,7 @@ lemma residuation1: "image R \<stileturn> dpreimage R" by (smt (verit, del_insts
 lemma residuation2: "preimage R \<stileturn> dimage R" by (smt (verit) subset_def dimage_def preimage_def)
 
 
-section \<open>Modal correspondences\<close>
+section \<open>Automating modal correspondences\<close>
 
 (*Let us introduce some properties of relations*)
 definition \<open>reflexive R \<equiv> \<forall>a. R a a\<close>
@@ -167,5 +167,12 @@ lemma euclidean_corresp: "euclidean R \<longleftrightarrow> (\<forall>P. \<lfloo
   by (smt (verit, ccfv_SIG) ADT euclidean_reldef image_transp preimage_comp preimage_order residuation1)
 lemma euclidean_corresp': "euclidean R \<longleftrightarrow> (\<forall>P. \<lfloor>\<^bold>\<diamond>\<^bold>\<box>P \<^bold>\<rightarrow> \<^bold>\<box>P\<rfloor>)"
   by (smt (verit, del_insts) ADT dimage_transp dpreimage_comp dual_preimage_order euclidean_reldef residuation2)
+
+
+section \<open>Lemmon-Scott schema\<close>
+
+(*Exercise: formalize and prove the Lemmon-Scott schema (cf. SEP article on modal logic:
+    https://plato.stanford.edu/entries/logic-modal/#GenAxi)*)
+
 
 end
